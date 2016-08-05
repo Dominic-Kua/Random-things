@@ -8,7 +8,7 @@ an error message when they should be returning a 404.
 #might add collections if I start to store the URLs in something funky like
 #a named tuple.
 import requests
-import scrapy
+
 
 def url_fetcher(url):
     '''
