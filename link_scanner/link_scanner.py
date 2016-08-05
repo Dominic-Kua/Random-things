@@ -4,15 +4,24 @@ This will hopefully evolve into a nice little link scanner
 which will pick up things like 403, 400 and hopeful 200s that show
 an error message when they should be returning a 404.
 '''
-#I think these two will be the main libraries I need,
+#I think this will be the main library I need,
 #might add collections if I start to store the URLs in something funky like
-#a named tuple.
+#a deque
+#if I thread it, and I might, it's going to end up needing asyncio I suspect.
+
 import requests
 
 
-def url_fetcher(url):
-    '''
-    This will take the input URL and scan through the sub-domains
-    returning a list of them.
-    '''
-    pass
+def url_checked(url_response, url_list):
+	'''
+	Very simply, this function really only checks to see if 
+	a URL has already been requested. If it hasn't it 
+	adds it to the list and if it has then it doesn't
+	Then it returns true or false depending on if it needs
+	requesting or not. 
+	'''
+	if not url_response in url_list:
+		url_list.append(url_response)
+		return url_list , True
+	else:
+		return url_list , False
