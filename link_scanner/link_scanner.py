@@ -8,6 +8,17 @@ an error message when they should be returning a 404.
 #might add collections if I start to store the URLs in something funky like
 #a deque
 #if I thread it, and I might, it's going to end up needing asyncio I suspect.
+import requests
+
+def base_url_checker(url):
+	try:
+		if requests.get(url).status_code == 200:
+			return True
+		else:
+			return False
+	except requests.exceptions.MissingSchema:
+		print("Invalid URL")
+		return False
 
 def main(url):
-	return {"www.bbc.co.uk/dihydrogenmonoxide": 404, "www.bbc.co.uk/admin": 403}
+	return {"http://www.bbc.co.uk/dihydrogenmonoxide": 404, "http://www.bbc.co.uk/admin": 404}
