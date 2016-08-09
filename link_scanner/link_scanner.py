@@ -12,7 +12,7 @@ an error message when they should be returning a 404.
 import requests
 
 
-def url_checked(url_response, url_list):
+def url_checked(url, url_list):
 	'''
 	Very simply, this function really only checks to see if
 	a URL has already been requested. If it hasn't it
@@ -20,8 +20,8 @@ def url_checked(url_response, url_list):
 	Then it returns true or false depending on if it needs
 	requesting or not.
 	'''
-	if url_response in url_list:
+	if url in url_list:
 		return url_list , False
 	else:
-		url_list.append(url_response)
+		url_list.append(url)
 		return url_list , True
