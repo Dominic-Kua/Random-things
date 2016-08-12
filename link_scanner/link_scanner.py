@@ -9,16 +9,18 @@ an error message when they should be returning a 404.
 #a deque
 #if I thread it, and I might, it's going to end up needing asyncio I suspect.
 import requests
+class scans():
 
-def base_url_checker(url):
-	try:
-		if requests.get(url).status_code == 200:
-			return True
-		else:
+
+	def base_url_checker(url):
+		try:
+			if requests.get(url).status_code == 200:
+				return True
+			else:
+				return False
+		except requests.exceptions.MissingSchema:
+			print("Invalid URL")
 			return False
-	except requests.exceptions.MissingSchema:
-		print("Invalid URL")
-		return False
 
 def main(url):
 	return {"http://www.bbc.co.uk/dihydrogenmonoxide": 404, "http://www.bbc.co.uk/admin": 404}
