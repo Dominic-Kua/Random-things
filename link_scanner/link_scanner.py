@@ -8,6 +8,7 @@ an error message when they should be returning a 404.
 #might add collections if I start to store the URLs in something funky like
 #a deque
 #if I thread it, and I might, it's going to end up needing asyncio I suspect.
+import re
 import requests
 class scans():
 
@@ -22,5 +23,21 @@ class scans():
 			print("Invalid URL")
 			return False
 
+	def url_parser(url, html):
+		url_list = []
+		url_regex = r"<a href='(.*)'"
+		url_list = re.findall(url_regex, html, re.IGNORECASE)
+		return url_list
+
+
+
+
+
+
 def main(url):
-	return {"http://www.bbc.co.uk/dihydrogenmonoxide": 404, "http://www.bbc.co.uk/admin": 404}
+	return {"http://www.bbc.co.uk/dihydrogenmonoxide": 404, "http://www.bbc.co.uk/admin": 403}
+
+
+if __name__ == "__main__":
+	main()
+
